@@ -3,7 +3,7 @@
 import { GalleryVerticalEnd } from "lucide-react"
 import { SignupForm } from "@/components/signup-form"
 import { useEffect, Suspense } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
 
 function SignupHandler() {
@@ -17,12 +17,23 @@ function SignupHandler() {
     const refresh_token = params.get('refresh_token') ?? ''
     const type = params.get('type')
 
-    if (access_token && type === 'invite') {
-      supabase.auth.setSession({ access_token, refresh_token })
-    } else {
-      router.push('/login')
+    async function setupSession() {
+      if (access_token && type === 'invite') {
+        const { error } = await supabase.auth.setSession({
+          access_token,
+          refresh_token,
+        })
+
+        if (error) {
+          router.push('/login')
+        }
+      } else {
+        router.push('/login')
+      }
     }
-  }, [])
+
+    setupSession()
+  }, [router])
 
   return null
 }
@@ -33,6 +44,7 @@ export default function SignupPage() {
       <Suspense>
         <SignupHandler />
       </Suspense>
+
       <div className="flex w-full max-w-sm flex-col gap-6">
         <a href="#" className="flex items-center gap-2 self-center font-medium">
           <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
@@ -40,6 +52,7 @@ export default function SignupPage() {
           </div>
           Cours de Prépa
         </a>
+
         <SignupForm />
       </div>
     </div>
