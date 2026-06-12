@@ -6,8 +6,16 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Atom, Cpu, FunctionSquare, ChevronRight, Search, LogOut } from 'lucide-react'
+import { Atom, Cpu, FunctionSquare, ChevronRight, Search, LogOut, Mail, FileXCorner } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
 
 interface Document {
   id: string
@@ -170,9 +178,25 @@ export default function DocumentsPage() {
           </p>
 
           {filtered.length === 0 ? (
-            <div className="bg-background rounded-xl border p-12 text-center text-muted-foreground text-sm">
-              Aucun document trouvé
-            </div>
+            <Empty className="h-full bg-muted/30">
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <FileXCorner />
+        </EmptyMedia>
+        <EmptyTitle>Aucun document</EmptyTitle>
+        <EmptyDescription className="max-w-xs text-pretty">
+          Si vous pensez qu'il s'agit d'un problème, contacter l'administrateur
+        </EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <Button variant="outline">
+            <a href="mailto:tonadresse@mail.com">
+              <Mail />
+              Contact
+            </a>
+        </Button>
+      </EmptyContent>
+    </Empty>
           ) : (
             <div className="flex flex-col gap-2">
               {filtered.map(doc => (
