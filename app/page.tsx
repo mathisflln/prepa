@@ -141,99 +141,43 @@ export default function DocumentsPage() {
         {/* Filtres */}
         <div className="bg-background rounded-xl border p-4 flex flex-col gap-4">
 
-          <div className="flex flex-col gap-2">
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-              Niveau
-            </span>
-
             <ToggleGroup
               type="single"
               value={level}
               onValueChange={(v) => v && setLevel(v)}
               className="justify-start flex-wrap"
             >
-              <ToggleGroupItem value="all">
-                Tous
-              </ToggleGroupItem>
-
-              <ToggleGroupItem value="PTSI">
-                PTSI
-              </ToggleGroupItem>
-
-              <ToggleGroupItem value="PT">
-                PT
-              </ToggleGroupItem>
+              <ToggleGroupItem value="all">Tous</ToggleGroupItem>
+              <ToggleGroupItem value="PTSI">PTSI</ToggleGroupItem>
+              <ToggleGroupItem value="PT">PT</ToggleGroupItem>
             </ToggleGroup>
-          </div>
 
           <div className="border-t" />
-
-          <div className="flex flex-col gap-2">
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-              Matière
-            </span>
-
             <ToggleGroup
               type="single"
               value={matiere}
               onValueChange={(v) => v && setMatiere(v)}
               className="justify-start flex-wrap"
             >
-              <ToggleGroupItem value="all">
-                Toutes
-              </ToggleGroupItem>
-
-              <ToggleGroupItem value="Mathématiques">
-                <FunctionSquare className="size-4 mr-1" />
-                Maths
-              </ToggleGroupItem>
-
-              <ToggleGroupItem value="Physique">
-                <Atom className="size-4 mr-1" />
-                Physique
-              </ToggleGroupItem>
-
-              <ToggleGroupItem value="SI">
-                <Cpu className="size-4 mr-1" />
-                SI
-              </ToggleGroupItem>
+              <ToggleGroupItem value="all">Toutes</ToggleGroupItem>
+              <ToggleGroupItem value="Mathématiques">Maths</ToggleGroupItem>
+              <ToggleGroupItem value="Physique">Physique</ToggleGroupItem>
+              <ToggleGroupItem value="SI">SI</ToggleGroupItem>
             </ToggleGroup>
-          </div>
 
           <div className="border-t" />
-
-          <div className="flex flex-col gap-2">
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-              Type
-            </span>
-
             <ToggleGroup
               type="single"
               value={type}
               onValueChange={(v) => v && setType(v)}
               className="justify-start flex-wrap"
             >
-              <ToggleGroupItem value="all">
-                Tous
-              </ToggleGroupItem>
-
-              <ToggleGroupItem value="Cours">
-                Cours
-              </ToggleGroupItem>
-
-              <ToggleGroupItem value="TD">
-                TD
-              </ToggleGroupItem>
-
-              <ToggleGroupItem value="DS">
-                DS
-              </ToggleGroupItem>
-
-              <ToggleGroupItem value="DM">
-                DM
-              </ToggleGroupItem>
+              <ToggleGroupItem value="all">Tous</ToggleGroupItem>
+              <ToggleGroupItem value="Cours">Cours</ToggleGroupItem>
+              <ToggleGroupItem value="TD">TD</ToggleGroupItem>
+              <ToggleGroupItem value="DS">DS</ToggleGroupItem>
+              <ToggleGroupItem value="DM">DM</ToggleGroupItem>
             </ToggleGroup>
-          </div>
 
           {(level !== 'all' ||
             matiere !== 'all' ||
