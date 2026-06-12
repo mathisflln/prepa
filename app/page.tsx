@@ -8,21 +8,15 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Atom, Cpu, FunctionSquare, ChevronRight, Search, LogOut, Mail, FileXCorner } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@/components/ui/empty"
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle, } from "@/components/ui/empty"
+import Link from "next/link"
 
 interface Document {
   id: string
   title: string
   level: 'PTSI' | 'PT'
-  matiere: string
-  type: string
+  matiere: 'Mathématiques' | 'Physique' | 'Chimie' | 'SI'
+  type: 'Cours' | 'TD' | 'DM' | 'DS' | 'Colles'
   tags: string[]
   file_path: string
   owner: string | null
@@ -190,10 +184,10 @@ export default function DocumentsPage() {
       </EmptyHeader>
       <EmptyContent>
         <Button variant="outline">
-            <a href="mailto:tonadresse@mail.com">
+            <Link href="mailto:tonadresse@mail.com">
               <Mail />
               Contact
-            </a>
+            </Link>
         </Button>
       </EmptyContent>
     </Empty>
