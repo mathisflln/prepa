@@ -8,14 +8,17 @@ import { supabase } from '@/lib/supabase/client'
 
 function SignupHandler() {
   const router = useRouter()
-  const params = useSearchParams()
 
   useEffect(() => {
-    const token_hash = params.get('token_hash')
+    const hash = window.location.hash.substring(1)
+    const params = new URLSearchParams(hash)
+
+    const access_token = params.get('access_token')
+    const refresh_token = params.get('refresh_token') ?? ''
     const type = params.get('type')
 
-    if (token_hash && type === 'invite') {
-      supabase.auth.verifyOtp({ token_hash, type: 'invite' })
+    if (access_token && type === 'invite') {
+      supabase.auth.setSession({ access_token, refresh_token })
     } else {
       router.push('/login')
     }
