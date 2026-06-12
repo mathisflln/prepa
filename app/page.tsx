@@ -179,12 +179,12 @@ export default function DocumentsPage() {
         </EmptyMedia>
         <EmptyTitle>Aucun document</EmptyTitle>
         <EmptyDescription className="max-w-xs text-pretty">
-          Si vous pensez qu'il s'agit d'un problème, contacter l'administrateur
+          Si vous pensez qu'il s'agit d'un problème, contacter l'administrateur.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Button variant="outline">
-            <Link href="mailto:tonadresse@mail.com">
+            <Link href="mailto:mathis.follin@free.fr">
               <Mail />
               Contact
             </Link>
