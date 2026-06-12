@@ -128,7 +128,7 @@ export default function DocumentsPage() {
       <div className="max-w-4xl mx-auto px-6 py-6 flex flex-col gap-5">
 
         {/* Barre de recherche + tri */}
-        <div className="flex gap-3">
+        <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
           <Input
             placeholder="Rechercher un document ou un thème..."
