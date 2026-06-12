@@ -28,7 +28,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
       setError('Email ou mot de passe incorrect')
       setLoading(false)
     } else {
-      router.push('')
+      router.push('/')
       router.refresh()
     }
   }
