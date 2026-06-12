@@ -146,6 +146,8 @@ export default function DocumentsPage() {
               value={level}
               onValueChange={(v) => v && setLevel(v)}
               className="justify-start flex-wrap"
+              variant="outline"
+              size="sm"
             >
               <ToggleGroupItem value="all">Tous</ToggleGroupItem>
               <ToggleGroupItem value="PTSI">PTSI</ToggleGroupItem>
@@ -157,6 +159,8 @@ export default function DocumentsPage() {
               value={matiere}
               onValueChange={(v) => v && setMatiere(v)}
               className="justify-start flex-wrap"
+              variant="outline"
+              size="sm"
             >
               <ToggleGroupItem value="all">Toutes</ToggleGroupItem>
               <ToggleGroupItem value="Mathématiques">Maths</ToggleGroupItem>
@@ -169,6 +173,8 @@ export default function DocumentsPage() {
               value={type}
               onValueChange={(v) => v && setType(v)}
               className="justify-start flex-wrap"
+              variant="outline"
+              size="sm"
             >
               <ToggleGroupItem value="all">Tous</ToggleGroupItem>
               <ToggleGroupItem value="Cours">Cours</ToggleGroupItem>
