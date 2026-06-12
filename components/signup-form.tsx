@@ -117,9 +117,12 @@ export function SignupForm({
         </CardContent>
       </Card>
 
-      <FieldDescription className="px-6 text-center">
-        En continuant, vous acceptez les CGU et la politique de confidentialité.
-      </FieldDescription>
+        <FieldDescription className="px-6 text-center">
+            En continuant, vous acceptez les{' '}
+            <a href="#" className="underline underline-offset-4">CGU</a>{' '}
+            et la{' '}
+            <a href="#" className="underline underline-offset-4">politique de confidentialité</a>.
+        </FieldDescription>
     </div>
   )
 }
