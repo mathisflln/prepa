@@ -152,7 +152,6 @@ export default function DocumentsPage() {
               <ToggleGroupItem value="PT">PT</ToggleGroupItem>
             </ToggleGroup>
 
-          <div className="border-t" />
             <ToggleGroup
               type="single"
               value={matiere}
@@ -165,7 +164,6 @@ export default function DocumentsPage() {
               <ToggleGroupItem value="SI">SI</ToggleGroupItem>
             </ToggleGroup>
 
-          <div className="border-t" />
             <ToggleGroup
               type="single"
               value={type}
