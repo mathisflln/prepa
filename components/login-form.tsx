@@ -29,6 +29,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
       setLoading(false)
     } else {
       router.push('')
+      router.refresh()
     }
   }
 
