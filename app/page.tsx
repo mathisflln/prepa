@@ -10,6 +10,7 @@ import { Atom, Cpu, FunctionSquare, ChevronRight, Search, LogOut, Mail, FileX } 
 import { useRouter } from 'next/navigation'
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import Link from "next/link"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 interface Document {
   id: string
@@ -105,12 +106,6 @@ export default function DocumentsPage() {
           !d.tags?.join(' ').toLowerCase().includes(search.toLowerCase())) return false
       return true
     })
-    .sort((a, b) => {
-      if (sort === 'date-desc') return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      if (sort === 'date-asc') return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-      if (sort === 'title-asc') return a.title.localeCompare(b.title)
-      return b.title.localeCompare(a.title)
-    })
 
   if (loading) return (
     <div className="flex min-h-svh items-center justify-center">
@@ -134,62 +129,132 @@ export default function DocumentsPage() {
 
         {/* Barre de recherche + tri */}
         <div className="flex gap-3">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <Input
-              placeholder="Rechercher un document ou un thème..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              className="pl-9 bg-background"
-            />
-          </div>
-          <Select value={sort} onValueChange={setSort}>
-            <SelectTrigger className="w-40 bg-background">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="date-desc">Plus récent</SelectItem>
-              <SelectItem value="date-asc">Plus ancien</SelectItem>
-              <SelectItem value="title-asc">A → Z</SelectItem>
-              <SelectItem value="title-desc">Z → A</SelectItem>
-            </SelectContent>
-          </Select>
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+          <Input
+            placeholder="Rechercher un document ou un thème..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="pl-9 bg-background"
+          />
         </div>
 
         {/* Filtres */}
-        <div className="bg-background rounded-xl border p-4 flex flex-col gap-3">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide w-16">Niveau</span>
-            <FilterPill label="Tous" active={level === 'all'} onClick={() => setLevel('all')} />
-            <FilterPill label="PTSI" active={level === 'PTSI'} onClick={() => setLevel('PTSI')} />
-            <FilterPill label="PT" active={level === 'PT'} onClick={() => setLevel('PT')} />
+        <div className="bg-background rounded-xl border p-4 flex flex-col gap-4">
+
+          <div className="flex flex-col gap-2">
+            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+              Niveau
+            </span>
+
+            <ToggleGroup
+              type="single"
+              value={level}
+              onValueChange={(v) => v && setLevel(v)}
+              className="justify-start flex-wrap"
+            >
+              <ToggleGroupItem value="all">
+                Tous
+              </ToggleGroupItem>
+
+              <ToggleGroupItem value="PTSI">
+                PTSI
+              </ToggleGroupItem>
+
+              <ToggleGroupItem value="PT">
+                PT
+              </ToggleGroupItem>
+            </ToggleGroup>
           </div>
+
           <div className="border-t" />
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide w-16">Matière</span>
-            <FilterPill label="Toutes" active={matiere === 'all'} onClick={() => setMatiere('all')} />
-            <FilterPill label="Mathématiques" active={matiere === 'Mathématiques'} onClick={() => setMatiere('Mathématiques')} />
-            <FilterPill label="Physique" active={matiere === 'Physique'} onClick={() => setMatiere('Physique')} />
-            <FilterPill label="SI" active={matiere === 'SI'} onClick={() => setMatiere('SI')} />
+
+          <div className="flex flex-col gap-2">
+            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+              Matière
+            </span>
+
+            <ToggleGroup
+              type="single"
+              value={matiere}
+              onValueChange={(v) => v && setMatiere(v)}
+              className="justify-start flex-wrap"
+            >
+              <ToggleGroupItem value="all">
+                Toutes
+              </ToggleGroupItem>
+
+              <ToggleGroupItem value="Mathématiques">
+                <FunctionSquare className="size-4 mr-1" />
+                Maths
+              </ToggleGroupItem>
+
+              <ToggleGroupItem value="Physique">
+                <Atom className="size-4 mr-1" />
+                Physique
+              </ToggleGroupItem>
+
+              <ToggleGroupItem value="SI">
+                <Cpu className="size-4 mr-1" />
+                SI
+              </ToggleGroupItem>
+            </ToggleGroup>
           </div>
+
           <div className="border-t" />
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide w-16">Type</span>
-            <FilterPill label="Tous" active={type === 'all'} onClick={() => setType('all')} />
-            <FilterPill label="Cours" active={type === 'Cours'} onClick={() => setType('Cours')} />
-            <FilterPill label="TD" active={type === 'TD'} onClick={() => setType('TD')} />
-            <FilterPill label="DS" active={type === 'DS'} onClick={() => setType('DS')} />
-            <FilterPill label="DM" active={type === 'DM'} onClick={() => setType('DM')} />
+
+          <div className="flex flex-col gap-2">
+            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+              Type
+            </span>
+
+            <ToggleGroup
+              type="single"
+              value={type}
+              onValueChange={(v) => v && setType(v)}
+              className="justify-start flex-wrap"
+            >
+              <ToggleGroupItem value="all">
+                Tous
+              </ToggleGroupItem>
+
+              <ToggleGroupItem value="Cours">
+                Cours
+              </ToggleGroupItem>
+
+              <ToggleGroupItem value="TD">
+                TD
+              </ToggleGroupItem>
+
+              <ToggleGroupItem value="DS">
+                DS
+              </ToggleGroupItem>
+
+              <ToggleGroupItem value="DM">
+                DM
+              </ToggleGroupItem>
+            </ToggleGroup>
           </div>
-          {(level !== 'all' || matiere !== 'all' || type !== 'all' || search) && (
+
+          {(level !== 'all' ||
+            matiere !== 'all' ||
+            type !== 'all' ||
+            search) && (
             <>
               <div className="border-t" />
-              <button
-                onClick={() => { setLevel('all'); setMatiere('all'); setType('all'); setSearch('') }}
-                className="text-xs text-muted-foreground hover:text-foreground text-left transition-colors"
+
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-fit"
+                onClick={() => {
+                  setLevel('all')
+                  setMatiere('all')
+                  setType('all')
+                  setSearch('')
+                }}
               >
                 Réinitialiser les filtres
-              </button>
+              </Button>
             </>
           )}
         </div>
